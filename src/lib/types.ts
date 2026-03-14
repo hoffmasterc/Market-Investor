@@ -1,4 +1,4 @@
-export type PropertyType = "single_family" | "condo" | "townhouse" | "multi_family";
+export type PropertyType = "single_family" | "duplex_triplex" | "small_multifamily";
 
 export interface PropertyDetails {
   zipCode: string;
@@ -33,23 +33,24 @@ export interface AnalysisResult {
   analyzedAt: string;
 }
 
-export const PROPERTY_FEATURES = [
-  "Central AC",
-  "In-unit Washer/Dryer",
+export const INTERIOR_FEATURES = [
+  "In-unit Laundry",
   "Dishwasher",
-  "Hardwood Floors",
-  "Granite/Quartz Countertops",
-  "Stainless Steel Appliances",
+  "Central AC",
+  "Updated Kitchen",
   "Updated Bathroom",
-  "Walk-in Closet",
-  "Garage Parking",
-  "Patio/Balcony",
-  "Smart Home Features",
-  "Pet Friendly (fenced yard)",
-  "Energy Efficient Windows",
-  "Ceiling Fans",
-  "Fresh Paint/Modern Colors",
-  "Updated Lighting Fixtures",
+] as const;
+
+export const EXTERIOR_FEATURES = [
+  "Off-street Parking",
+  "Garage",
+  "Yard",
+  "Balcony or Patio",
+] as const;
+
+export const PROPERTY_FEATURES = [
+  ...INTERIOR_FEATURES,
+  ...EXTERIOR_FEATURES,
 ] as const;
 
 export type PropertyFeature = (typeof PROPERTY_FEATURES)[number];

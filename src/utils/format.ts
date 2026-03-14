@@ -21,6 +21,16 @@ export function gradeColor(grade: string): string {
   return "text-red-400";
 }
 
+const PROPERTY_TYPE_LABELS: Record<string, string> = {
+  single_family: "Single Family",
+  duplex_triplex: "Duplex / Triplex",
+  small_multifamily: "Small Multifamily",
+};
+
+export function formatPropertyType(type: string): string {
+  return PROPERTY_TYPE_LABELS[type] ?? type.replace(/_/g, " ");
+}
+
 export function gradeBgColor(grade: string): string {
   if (grade.startsWith("A")) return "bg-green-500/20 border-green-500/30";
   if (grade.startsWith("B")) return "bg-blue-500/20 border-blue-500/30";

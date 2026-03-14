@@ -9,6 +9,7 @@ import { UpgradeList } from "@/components/UpgradeList";
 import { HiddenValueFeatures } from "@/components/HiddenValueFeatures";
 import { NeighborhoodComparison } from "@/components/NeighborhoodComparison";
 import { WarningList } from "@/components/WarningList";
+import { formatPropertyType } from "@/utils/format";
 
 function ResultsContent() {
   const searchParams = useSearchParams();
@@ -36,7 +37,7 @@ function ResultsContent() {
         <h1 className="text-2xl font-bold">Analysis Results</h1>
         <p className="text-sm text-[var(--color-text-muted)]">
           {property.zipCode} &middot;{" "}
-          {property.propertyType.replace("_", " ")} &middot;{" "}
+          {formatPropertyType(property.propertyType)} &middot;{" "}
           {property.bedrooms}bd/{property.bathrooms}ba
         </p>
       </div>

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useSavedAnalyses } from "@/context/SavedAnalysesContext";
-import { gradeColor, formatRange } from "@/utils/format";
+import { gradeColor, formatRange, formatPropertyType } from "@/utils/format";
 
 export default function SavedPage() {
   const { analyses, remove } = useSavedAnalyses();
@@ -40,7 +40,7 @@ export default function SavedPage() {
                     </span>
                   </div>
                   <p className="text-sm text-[var(--color-text-muted)]">
-                    {analysis.property.propertyType.replace("_", " ")} &middot;{" "}
+                    {formatPropertyType(analysis.property.propertyType)} &middot;{" "}
                     {analysis.property.bedrooms}bd/
                     {analysis.property.bathrooms}ba
                   </p>

@@ -8,42 +8,28 @@ import { getMarketSignals, adjustRentForProperty } from "@/lib/marketData";
 
 // Cost estimates per feature upgrade
 const UPGRADE_COSTS: Record<string, [number, number]> = {
-  "Central AC": [3500, 7000],
-  "In-unit Washer/Dryer": [1500, 3000],
+  "In-unit Laundry": [1500, 3000],
   Dishwasher: [400, 900],
-  "Hardwood Floors": [3000, 8000],
-  "Granite/Quartz Countertops": [2000, 5000],
-  "Stainless Steel Appliances": [2500, 5500],
+  "Central AC": [3500, 7000],
+  "Updated Kitchen": [5000, 15000],
   "Updated Bathroom": [3000, 10000],
-  "Walk-in Closet": [1500, 4000],
-  "Garage Parking": [8000, 20000],
-  "Patio/Balcony": [2000, 8000],
-  "Smart Home Features": [300, 1200],
-  "Pet Friendly (fenced yard)": [1500, 4000],
-  "Energy Efficient Windows": [3000, 8000],
-  "Ceiling Fans": [150, 500],
-  "Fresh Paint/Modern Colors": [500, 2000],
-  "Updated Lighting Fixtures": [200, 800],
+  "Off-street Parking": [2000, 6000],
+  Garage: [8000, 20000],
+  Yard: [1500, 5000],
+  "Balcony or Patio": [2000, 8000],
 };
 
 // Rent lift as % of median rent per feature
 const RENT_LIFT_PERCENT: Record<string, [number, number]> = {
-  "Central AC": [0.04, 0.08],
-  "In-unit Washer/Dryer": [0.05, 0.1],
+  "In-unit Laundry": [0.05, 0.1],
   Dishwasher: [0.02, 0.04],
-  "Hardwood Floors": [0.03, 0.06],
-  "Granite/Quartz Countertops": [0.03, 0.06],
-  "Stainless Steel Appliances": [0.02, 0.05],
+  "Central AC": [0.04, 0.08],
+  "Updated Kitchen": [0.05, 0.1],
   "Updated Bathroom": [0.04, 0.08],
-  "Walk-in Closet": [0.02, 0.04],
-  "Garage Parking": [0.05, 0.1],
-  "Patio/Balcony": [0.02, 0.05],
-  "Smart Home Features": [0.01, 0.03],
-  "Pet Friendly (fenced yard)": [0.03, 0.07],
-  "Energy Efficient Windows": [0.02, 0.04],
-  "Ceiling Fans": [0.01, 0.02],
-  "Fresh Paint/Modern Colors": [0.02, 0.04],
-  "Updated Lighting Fixtures": [0.01, 0.02],
+  "Off-street Parking": [0.03, 0.06],
+  Garage: [0.05, 0.1],
+  Yard: [0.03, 0.07],
+  "Balcony or Patio": [0.02, 0.05],
 };
 
 function generateId(): string {

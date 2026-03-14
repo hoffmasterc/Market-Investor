@@ -9,9 +9,8 @@ import type { PropertyType } from "@/lib/types";
 
 const PROPERTY_TYPES: { value: PropertyType; label: string }[] = [
   { value: "single_family", label: "Single Family" },
-  { value: "condo", label: "Condo" },
-  { value: "townhouse", label: "Townhouse" },
-  { value: "multi_family", label: "Multi-Family" },
+  { value: "duplex_triplex", label: "Duplex / Triplex" },
+  { value: "small_multifamily", label: "Small Multifamily" },
 ];
 
 export default function AnalyzePage() {
@@ -49,7 +48,12 @@ export default function AnalyzePage() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6 py-4">
-      <h1 className="text-2xl font-bold">Analyze Property</h1>
+      <div>
+        <h1 className="text-2xl font-bold">Analyze Property</h1>
+        <p className="mt-1 text-sm text-[var(--color-text-muted)]">
+          Enter your property details to discover upgrade opportunities.
+        </p>
+      </div>
 
       {/* ZIP Code */}
       <div className="space-y-1">
@@ -73,7 +77,7 @@ export default function AnalyzePage() {
         <label className="text-sm font-medium text-[var(--color-text-muted)]">
           Property Type
         </label>
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-3 gap-2">
           {PROPERTY_TYPES.map((pt) => (
             <button
               key={pt.value}
