@@ -29,6 +29,7 @@ export interface AnalysisResult {
     propertyHas: boolean;
   }[];
   overImprovementWarnings: string[];
+  investorTip: string;
   estimatedTotalRentLift: [number, number];
   analyzedAt: string;
 }

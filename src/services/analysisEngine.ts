@@ -155,6 +155,15 @@ export function analyzeProperty(property: PropertyDetails): AnalysisResult {
     0
   );
 
+  // Generate contextual investor tip
+  const investorTip = generateInvestorTip(
+    topUpgrades,
+    hiddenValueFeatures,
+    overImprovementWarnings,
+    market.demandLevel,
+    property.currentFeatures.length,
+  );
+
   return {
     id: generateId(),
     property,
@@ -164,7 +173,47 @@ export function analyzeProperty(property: PropertyDetails): AnalysisResult {
     hiddenValueFeatures,
     neighborhoodComparison,
     overImprovementWarnings,
+    investorTip,
     estimatedTotalRentLift: [totalLiftLow, totalLiftHigh],
     analyzedAt: new Date().toISOString(),
   };
+}
+
+function generateInvestorTip(
+  topUpgrades: UpgradeOpportunity[],
+  hiddenValue: string[],
+  warnings: string[],
+  demandLevel: string,
+  featureCount: number,
+): string {
+  if (featureCount === 0 && topUpgrades.length > 0) {
+    const best = topUpgrades[0];
+    return `Start with "${best.feature}" — it has the highest ROI in this market and is a low-risk first upgrade.`;
+  }
+
+  if (warnings.length >= 2) {
+    return "This property may already be over-improved for its market. Focus on marketing existing features rather than adding new ones.";
+  }
+
+  if (hiddenValue.length >= 2) {
+    return `This property has ${hiddenValue.length} features that are rare in the neighborhood. Highlight these in listings to justify above-market rent.`;
+  }
+
+  const highPriority = topUpgrades.filter((u) => u.priority === "high");
+  if (highPriority.length >= 2) {
+    return `There are ${highPriority.length} high-ROI upgrades available. Consider bundling them together to maximize rent lift while sharing contractor mobilization costs.`;
+  }
+
+  if (demandLevel === "high" && topUpgrades.length > 0) {
+    return "Rental demand is strong in this area. Even modest upgrades can command premium rents — act while the market favors landlords.";
+  }
+
+  if (topUpgrades.length > 0) {
+    const cheapest = [...topUpgrades].sort(
+      (a, b) => a.estimatedCost[0] - b.estimatedCost[0]
+    )[0];
+    return `For the best quick win, consider "${cheapest.feature}" — it has one of the lowest costs and still delivers meaningful rent lift.`;
+  }
+
+  return "This property is well-equipped for its market. Maintain current features and revisit upgrades when neighborhood trends shift.";
 }
